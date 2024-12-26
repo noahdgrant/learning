@@ -9,7 +9,8 @@ SRC_FILES_LOX = $(wildcard $(SRC_DIR)/$(PACKAGE_LOX)/*.java)
 SRC_FILES_TOOL = $(wildcard $(SRC_DIR)/$(PACKAGE_TOOL)/*.java)
 CLASS_FILES_LOX = $(SRC_FILES_LOX:$(SRC_DIR)/%.java=$(BIN_DIR)/%.class)
 CLASS_FILES_TOOL = $(SRC_FILES_TOOL:$(SRC_DIR)/%.java=$(BIN_DIR)/%.class)
-ARGS = ./src/lox
+ARGS =
+TOOL_ARGS = ./src/lox
 
 # Default target
 default: compile
@@ -23,11 +24,11 @@ $(BIN_DIR)/%.class: $(SRC_DIR)/%.java
 
 # Run target
 run: compile
-	java -cp $(BIN_DIR) $(MAIN_CLASS)
+	java -cp $(BIN_DIR) $(MAIN_CLASS) $(ARGS)
 
 # Tool target
 tool: $(CLASS_FILES_TOOL)
-	java -cp $(BIN_DIR) $(TOOL_CLASS) $(ARGS)
+	java -cp $(BIN_DIR) $(TOOL_CLASS) $(TOOL_ARGS)
 
 $(BIN_DIR)/$(PACKAGE_TOOL)/%.class: $(SRC_DIR)/$(PACKAGE_TOOL)/%.java
 	@mkdir -p $(BIN_DIR)/$(PACKAGE_TOOL)
